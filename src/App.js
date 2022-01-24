@@ -1,17 +1,16 @@
-
 import './App.css';
-import Login from './components/Login';
-import Signup from './components/Signup';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import ChatPage from './pages/ChatPage';
 
 function App() {
-  
   return (
-    <div className="App">
-      <header className="App-header">
-        <Login />
-        <Signup />
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/chat' element={<ChatPage />} />
+      </Routes>
+    </Router>
   );
 }
 
