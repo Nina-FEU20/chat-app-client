@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { AuthState } from '../context/AuthContext';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -8,7 +8,7 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
 
-  const navigate = useNavigate();
+  const { setAuthUser } = AuthState();
 
   const config = {
     headers: {
@@ -28,13 +28,12 @@ const Signup = () => {
     if (username.length < 4) return setError('Username must be atleast 4 characters');
 
     try {
-      const data = await axios.post('http://localhost:5000/api/user', { username, password, confirmPassword }, config);
+      const { data } = await axios.post('http://localhost:5000/api/user', { username, password }, config);
       console.log(data);
 
-      // TODO: Create a context and set user
       setUsername('');
       setPassword('');
-      navigate('/chat');
+      setAuthUser(data);
     } catch (err) {
       setError(err.response.data);
     }
