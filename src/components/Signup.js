@@ -19,10 +19,13 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!password || !confirmPassword || !username) {
-      setError('All fields are required');
-      return;
-    }
+    if (!password || !confirmPassword || !username) return setError('All fields are required');
+
+    if (password !== confirmPassword) return setError('Passwords do not match');
+
+    if (password.length < 6) return setError('Password must be atleast 6 characters');
+
+    if (username.length < 4) return setError('Username must be atleast 4 characters');
 
     try {
       const data = await axios.post('http://localhost:5000/api/user', { username, password, confirmPassword }, config);

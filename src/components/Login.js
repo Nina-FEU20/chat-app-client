@@ -17,6 +17,9 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!password || !username) return setError('All fields are required');
+
     try {
       const data = await axios.post('http://localhost:5000/api/user/login', { username, password }, config);
       console.log(data);
