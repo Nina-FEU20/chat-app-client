@@ -10,6 +10,7 @@ const Login = () => {
   const { setAuthUser } = AuthState();
 
   const config = {
+  
     headers: {
       'Content-type': 'application/json',
     },
@@ -21,7 +22,7 @@ const Login = () => {
     if (!password || !username) return setError('All fields are required');
 
     try {
-      const { data } = await axios.post('http://localhost:5000/api/user/login', { username, password }, config);
+      const { data } = await axios.post('http://localhost:5000/api/user/login', { username, password }, { withCredentials: true });
       console.log(data);
 
       setUsername('');
