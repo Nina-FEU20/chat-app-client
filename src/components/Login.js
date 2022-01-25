@@ -9,13 +9,6 @@ const Login = () => {
 
   const { setAuthUser } = AuthState();
 
-  const config = {
-  
-    headers: {
-      'Content-type': 'application/json',
-    },
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
