@@ -7,12 +7,18 @@ const ChatPage = () => {
   const { authUser, setAuthUser } = AuthState();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!authUser) navigate('/');
+  }, [authUser, navigate]);
+
   const handleSignOut = async(e) => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post('http://localhost:5000/api/user/logout', { username: 'test' }, { withCredentials: true });
+      const { data } = await axios.post('http://localhost:5000/api/user/logout', { user: authUser }, { withCredentials: true });
       console.log(data)
+      localStorage.clear();
+      setAuthUser(null)
     } catch(err) {
       console.log(err)
     }
@@ -20,9 +26,7 @@ const ChatPage = () => {
     setAuthUser(null);
   };
 
-  useEffect(() => {
-    if (!authUser) navigate('/');
-  }, [authUser, navigate]);
+
 
   const getAllUsers = async(e) => {
     e.preventDefault(); 

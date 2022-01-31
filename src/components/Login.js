@@ -20,6 +20,7 @@ const Login = () => {
 
       setUsername('');
       setPassword('');
+      localStorage.setItem('user', JSON.stringify(data))
       setAuthUser(data);
     } catch (err) {
       setError(err.response.data);
