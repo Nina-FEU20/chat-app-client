@@ -9,7 +9,6 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(authUser);
     if (authUser) navigate('/chat');
   }, [authUser, navigate]);
 

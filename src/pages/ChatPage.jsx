@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AuthState } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import Conversations from '../components/Conversations';
+import ChatRoom from '../components/ChatRoom';
 
 const ChatPage = () => {
+  const [activeChat, setActiveChat] = useState(null);
+
   const { authUser, setAuthUser } = AuthState();
   const navigate = useNavigate();
 
@@ -59,7 +62,8 @@ const ChatPage = () => {
       <button onClick={(e) => handleSignOut(e)}>Log out</button>
       <button onClick={(e) => getAllUsers(e)}>Get all users</button>
       <button onClick={(e) => getSingleUser(e)}>Get single user</button>
-      <Conversations />
+      <Conversations setActiveChat={setActiveChat} />
+      <ChatRoom activeChat={activeChat} />
     </div>
   );
 };
