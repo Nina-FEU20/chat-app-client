@@ -14,8 +14,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <Login />
-      <Signup />
+      <h1 style={{ display: 'grid', placeContent: 'center', marginTop: '4rem' }}>Welcome to Topics Daily</h1>
     </div>
   );
 };

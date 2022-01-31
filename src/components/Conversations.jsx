@@ -35,10 +35,12 @@ const Conversations = ({ setActiveChat }) => {
   return (
     <div>
       <h3>Conversations</h3>
-      {chats &&
+      {authUser &&
+        chats &&
         chats.map((chat) => (
           <div key={chat._id} onClick={() => handleClick(chat._id)}>
             <h5>{getChatName(authUser, chat)}</h5>
+            <h5>Chatnamn</h5>
           </div>
         ))}
     </div>

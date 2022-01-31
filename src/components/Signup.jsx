@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { AuthState } from '../context/AuthContext';
 
-const Signup = () => {
+const Signup = ({ setOpen }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -33,8 +33,9 @@ const Signup = () => {
 
       setUsername('');
       setPassword('');
-      localStorage.setItem('user', JSON.stringify(data))
+      localStorage.setItem('user', JSON.stringify(data));
       setAuthUser(data);
+      setOpen(null);
     } catch (err) {
       setError(err.response.data);
     }
