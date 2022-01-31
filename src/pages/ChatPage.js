@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { AuthState } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import Conversations from '../components/Conversations';
 
 const ChatPage = () => {
   const { authUser, setAuthUser } = AuthState();
@@ -58,6 +59,7 @@ const ChatPage = () => {
       <button onClick={(e) => handleSignOut(e)}>Log out</button>
       <button onClick={(e) => getAllUsers(e)}>Get all users</button>
       <button onClick={(e) => getSingleUser(e)}>Get single user</button>
+      <Conversations />
     </div>
   );
 };
