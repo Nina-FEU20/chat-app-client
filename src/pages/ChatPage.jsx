@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { AuthState } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Conversations from '../components/Conversations';
+import Chats from '../components/Chats';
 import ChatRoom from '../components/ChatRoom';
-import Nav from '../components/Nav';
 
 const ChatPage = () => {
   const [activeChat, setActiveChat] = useState(null);
 
-  const { authUser, setAuthUser } = AuthState();
+  const { authUser } = AuthState();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,7 +43,7 @@ const ChatPage = () => {
 
       <button onClick={(e) => getAllUsers(e)}>Get all users</button>
       <button onClick={(e) => getSingleUser(e)}>Get single user</button>
-      <Conversations setActiveChat={setActiveChat} />
+      <Chats setActiveChat={setActiveChat} />
       <ChatRoom activeChat={activeChat} />
     </div>
   );

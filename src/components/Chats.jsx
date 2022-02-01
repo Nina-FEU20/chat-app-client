@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { AuthState } from '../context/AuthContext';
 import { getChatName } from '../utils/ChatUtils';
+import Search from './Search';
 
 const Conversations = ({ setActiveChat }) => {
   const [chats, setChats] = useState([]);
@@ -34,13 +35,13 @@ const Conversations = ({ setActiveChat }) => {
 
   return (
     <div>
-      <h3>Conversations</h3>
+      <h3>My Chats</h3>
+      <Search />
       {authUser &&
         chats &&
         chats.map((chat) => (
           <div key={chat._id} onClick={() => handleClick(chat._id)}>
             <h5>{getChatName(authUser, chat)}</h5>
-            <h5>Chatnamn</h5>
           </div>
         ))}
     </div>
