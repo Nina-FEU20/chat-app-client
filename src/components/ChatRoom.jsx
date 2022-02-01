@@ -3,10 +3,10 @@ import axios from 'axios';
 import { getChatName } from '../utils/ChatUtils';
 import { AuthState } from '../context/AuthContext';
 
-const ChatRoom = ({ activeChat }) => {
+const ChatRoom = () => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState([]);
-  const { authUser, setAuthUser } = AuthState('');
+  const { authUser, activeChat } = AuthState('');
 
   useEffect(() => {
     (async () => {
@@ -43,7 +43,7 @@ const ChatRoom = ({ activeChat }) => {
 
   return (
     <div>
-      {activeChat ? <h4>{getChatName(authUser, activeChat)}</h4> : <h4>Choose a chat to start!</h4>}
+      {authUser && activeChat ? <h4>{getChatName(authUser, activeChat)}</h4> : <h4>Choose a chat to start!</h4>}
       {messages.length ? (
         messages.map((message) => (
           <div key={message._id}>

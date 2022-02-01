@@ -1,28 +1,10 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { AuthState } from '../context/AuthContext';
 import { getChatName } from '../utils/ChatUtils';
-import Users from './Users';
 
-const Chats = ({ setActiveChat }) => {
-  const [chats, setChats] = useState([]);
-  const { authUser, setAuthUser } = AuthState();
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await axios.get('http://localhost:5000/api/chat', { withCredentials: true });
-
-        setChats(data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-
-    return () => {
-      setChats([]); // To remove warning "Cant perform a react state update"
-    };
-  }, []);
+const MyChats = ({ setChats, chats }) => {
+  const { authUser, setActiveChat } = AuthState();
 
   const handleClick = async (chatId) => {
     try {
@@ -45,10 +27,8 @@ const Chats = ({ setActiveChat }) => {
             </div>
           ))}
       </div>
-
-      <Users setChats={setChats} chats={chats} />
     </div>
   );
 };
 
-export default Chats;
+export default MyChats;

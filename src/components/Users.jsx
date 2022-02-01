@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { DebounceInput } from 'react-debounce-input';
 import axios from 'axios';
+import { AuthState } from '../context/AuthContext';
 
 const Users = ({ setChats, chats }) => {
   const [searchResult, setSearchResult] = useState('');
+  const { setActiveChat } = AuthState();
 
   const handleSearch = async (e) => {
     if (e.target.value) {
@@ -23,6 +25,7 @@ const Users = ({ setChats, chats }) => {
       const { data } = await axios.post('http://localhost:5000/api/chat', { userId: userId }, { withCredentials: true });
       console.log(data);
       setChats([...chats, data]);
+      setActiveChat(data);
     } catch (err) {
       console.log(err.message);
     }
