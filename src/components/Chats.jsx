@@ -2,9 +2,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { AuthState } from '../context/AuthContext';
 import { getChatName } from '../utils/ChatUtils';
-import Search from './Search';
+import Users from './Users';
 
-const Conversations = ({ setActiveChat }) => {
+const Chats = ({ setActiveChat }) => {
   const [chats, setChats] = useState([]);
   const { authUser, setAuthUser } = AuthState();
 
@@ -35,17 +35,20 @@ const Conversations = ({ setActiveChat }) => {
 
   return (
     <div>
-      <h3>My Chats</h3>
-      <Search />
-      {authUser &&
-        chats &&
-        chats.map((chat) => (
-          <div key={chat._id} onClick={() => handleClick(chat._id)}>
-            <h5>{getChatName(authUser, chat)}</h5>
-          </div>
-        ))}
+      <div style={{ marginBottom: '2rem' }}>
+        <h3>My Chats</h3>
+        {authUser &&
+          chats &&
+          chats.map((chat) => (
+            <div key={chat._id} onClick={() => handleClick(chat._id)}>
+              <h4>{getChatName(authUser, chat)}</h4>
+            </div>
+          ))}
+      </div>
+
+      <Users setChats={setChats} chats={chats} />
     </div>
   );
 };
 
-export default Conversations;
+export default Chats;
