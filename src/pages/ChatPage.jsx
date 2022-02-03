@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { AuthState } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import ChatRoom from '../components/ChatRoom';
-import ChatMenu from '../components/ChatMenu';
+
+import MyChats from '../components/MyChats';
 
 const ChatPage = () => {
   const { authUser } = AuthState();
@@ -16,7 +17,7 @@ const ChatPage = () => {
     <div>
       <h1 style={{ textAlign: 'center' }}>CHATPAGE</h1>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <ChatMenu />
+        <MyChats />
         <ChatRoom />
       </div>
     </div>
