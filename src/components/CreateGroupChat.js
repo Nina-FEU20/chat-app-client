@@ -9,16 +9,29 @@ const CreateGroupChat = ({ setModalOpen, setChats, chats }) => {
 
   const { setActiveChat } = AuthState();
 
-  const createChat = async (userId) => {
+  const createChat = async () => {
     try {
-      const { data } = await axios.post('http://localhost:5000/api/chat', { userId: userId }, { withCredentials: true });
-      console.log(data);
+      console.log(users.length);
+      if (users.length === 0) return;
 
-      const chatExists = checkExists(data);
-      console.log(chatExists);
-      if (!chatExists) setChats([data, ...chats]);
+      if (users.length === 1) {
+        const { data } = await axios.post('http://localhost:5000/api/chat', { user: users[0] }, { withCredentials: true });
 
-      setActiveChat(data);
+        const chatExists = checkExists(chats, data);
+        if (!chatExists) setChats([data, ...chats]);
+
+        setActiveChat(data);
+      }
+
+      if (users.length > 1) {
+        const { data } = await axios.post('http://localhost:5000/api/chat/group', { users: users }, { withCredentials: true });
+
+        setChats([data, ...chats]);
+        setActiveChat(data);
+      }
+
+      setUsers([]);
+      setModalOpen(false);
     } catch (err) {
       console.log(err.message);
     }
@@ -49,7 +62,7 @@ const CreateGroupChat = ({ setModalOpen, setChats, chats }) => {
           <i onClick={() => handleRemoveFromUsers(user)}>X</i>
         </div>
       ))}
-      <button>Create Chat</button>
+      <button onClick={createChat}>Create Chat</button>
     </Modal>
   );
 };
