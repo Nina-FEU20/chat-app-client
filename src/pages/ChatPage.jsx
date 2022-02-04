@@ -14,8 +14,9 @@ const ChatPage = () => {
   }, [authUser, navigate]);
 
   return (
-    <div>
-      <h1 style={{ textAlign: 'center' }}>CHATPAGE</h1>
+    <div className='container mx-auto bg-sky-500'>
+      <h1 className='text-3xl font-bold m-auto'>CHATPAGE</h1>
+
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <MyChats />
         <ChatRoom />
