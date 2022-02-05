@@ -26,7 +26,7 @@ const Nav = () => {
   };
 
   return (
-    <div className='container mx-auto'>
+    <div className='container mx-auto max-w-[90vw]'>
       <div className='flex justify-between items-center py-4'>
         <div className='flex items-center'>
           <BsChatDotsFill className='text-teal200 text-5xl' />

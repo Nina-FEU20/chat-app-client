@@ -13,7 +13,11 @@ module.exports = {
       red: '#FF0000',
       white: '#FFFFFF',
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'hero-pattern': "url('/src/assets/layered-waves-haikei.svg')",
+      },
+    },
   },
   plugins: [],
 };
