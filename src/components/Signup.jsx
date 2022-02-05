@@ -3,6 +3,7 @@ import axios from 'axios';
 import { AuthState } from '../context/AuthContext';
 import Input from './Input';
 import Button from './Button';
+import { useKeyDownListener } from '../hooks/useListener';
 
 const Signup = ({ setOpen }) => {
   const [username, setUsername] = useState('');
@@ -42,6 +43,8 @@ const Signup = ({ setOpen }) => {
       setError(err.response.data);
     }
   };
+
+  useKeyDownListener(handleSubmit);
 
   return (
     <>

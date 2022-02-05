@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { AuthState } from '../context/AuthContext';
 import Input from './Input';
 import Button from './Button';
+import { useKeyDownListener } from '../hooks/useListener';
 
 const Login = ({ setOpen }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const { setAuthUser } = AuthState();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(e);
+    console.log(password);
 
     if (!password || !username) return setError('All fields are required');
 
@@ -29,6 +30,24 @@ const Login = ({ setOpen }) => {
       setError(err.response.data);
     }
   };
+
+  useKeyDownListener(handleSubmit);
+  // console.log(username);
+  // console.log(password);
+  const { setAuthUser } = AuthState();
+
+  // useEffect(() => {
+  //   const listener = (event) => {
+  //     if (event.code === 'Enter' || event.code === 'NumpadEnter') {
+  //       console.log('Enter key was pressed. Run your function.');
+  //       handleSubmit(event);
+  //     }
+  //   };
+  //   document.addEventListener('keydown', listener);
+  //   return () => {
+  //     document.removeEventListener('keydown', listener);
+  //   };
+  // });
 
   return (
     <div>
