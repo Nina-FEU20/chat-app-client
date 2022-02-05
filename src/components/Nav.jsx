@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { AuthState } from '../context/AuthContext';
 import axios from 'axios';
-import Signup from './Signup';
-import Login from './Login';
+import { BsChatDotsFill } from 'react-icons/bs';
+import avatar from '../assets/avatar.png';
+import Button from './Button';
+import AccountModal from './AccountModal';
 
 const Nav = () => {
-  const [open, setOpen] = useState(null);
+  const [open, setOpen] = useState(false);
   const { authUser, setAuthUser } = AuthState();
 
   const handleSignOut = async (e) => {
@@ -24,22 +26,28 @@ const Nav = () => {
   };
 
   return (
-    <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h2>Topics Daily</h2>
+    <div className='container mx-auto'>
+      <div className='flex justify-between items-center py-4'>
+        <div className='flex items-center'>
+          <BsChatDotsFill className='text-teal200 text-5xl' />
+          <h2 className='pl-2 text-2xl'>Talk Daily</h2>
+        </div>
+
         {authUser ? (
-          <div>
-            <i>UserIcon </i>
-            <button onClick={(e) => handleSignOut(e)}>Logout</button>
+          <div className='flex space-x-2 sm:space-x-6 align-items'>
+            <img src={avatar} alt='avatar' className='h-10' />
+            <Button onClick={(e) => handleSignOut(e)}>Logout</Button>
           </div>
         ) : (
-          <div>
-            <button onClick={() => setOpen('Signup')}>Sign up</button>
-            <button onClick={() => setOpen('Login')}>Log in</button>
+          <div className='flex space-x-2 sm:space-x-6 align-items'>
+            <Button onClick={() => setOpen('create')}>Sign up</Button>
+            <Button filled={true} onClick={() => setOpen('login')}>
+              Log in
+            </Button>
           </div>
         )}
       </div>
-      {open && <div>{open === 'Signup' ? <Signup setOpen={setOpen} /> : <Login setOpen={setOpen} />}</div>}
+      {open && <AccountModal setOpen={setOpen} open={open} />}
     </div>
   );
 };

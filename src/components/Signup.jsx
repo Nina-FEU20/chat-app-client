@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { AuthState } from '../context/AuthContext';
+import Input from './Input';
+import Button from './Button';
 
 const Signup = ({ setOpen }) => {
   const [username, setUsername] = useState('');
@@ -42,18 +44,48 @@ const Signup = ({ setOpen }) => {
   };
 
   return (
-    <div>
-      <h3>Sign up</h3>
-      <form>
-        <input type='text' value={username} required onChange={(e) => setUsername(e.target.value)} />
-        <input type='password' value={password} required onChange={(e) => setPassword(e.target.value)} autoComplete='on' />
-        <input type='password' value={confirmPassword} required onChange={(e) => setConfirmPassword(e.target.value)} autoComplete='on' />
-        <button type='submit' onClick={handleSubmit}>
+    <>
+      <h3 className='text-center mb-4 text-2xl  text-teal500'>Create a new account</h3>
+      <form className='mb-6'>
+        <Input
+          name='username'
+          type='text'
+          value={username}
+          placeholder='Your Username'
+          label='Username'
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <Input
+          type='password'
+          value={password}
+          required
+          onChange={(e) => setPassword(e.target.value)}
+          autoComplete='on'
+          name='password'
+          label='Password'
+          placeholder='Password'
+        />
+        <Input
+          type='password'
+          value={confirmPassword}
+          required
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          autoComplete='on'
+          label='Confirm Password'
+          placeholder='Confirm Password'
+        />
+        <p className='text-red font-medium text-sm -mt-2'>{error && '* ' + error}</p>
+        <Button filled='true' type='submit' onClick={handleSubmit} classnames='mt-4'>
           Sign up
-        </button>
-        {error && <p>{error}</p>}
+        </Button>
       </form>
-    </div>
+      <p className='text-right font-medium text-teal400'>
+        Already have an account?{' '}
+        <button className='font-medium text-teal400 hover:text-pink100 underline' onClick={() => setOpen('login')}>
+          Login
+        </button>
+      </p>
+    </>
   );
 };
 
