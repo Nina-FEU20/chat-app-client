@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getChatName } from '../utils/ChatUtils';
 import { AuthState } from '../context/AuthContext';
+import Input from './Input';
+import Button from './Button';
+import MessageForm from './MessageForm';
 
 const ChatRoom = () => {
   const [messages, setMessages] = useState([]);
@@ -42,24 +45,21 @@ const ChatRoom = () => {
   };
 
   return (
-    <div>
-      {authUser && activeChat ? <h4>{getChatName(authUser, activeChat)}</h4> : <h4>Choose a chat to start!</h4>}
-      {messages.length ? (
-        messages.map((message) => (
-          <div key={message._id}>
-            <span>{message.author.username}: </span>
-            <span>{message.content}</span>
-          </div>
-        ))
-      ) : (
-        <p>No Messages yet</p>
-      )}
-      <form>
-        <input type='text' value={message} onChange={(e) => setMessage(e.target.value)} />
-        <button type='submit' onClick={(e) => sendMessage(e)}>
-          send
-        </button>
-      </form>
+    <div className={` ${activeChat ? 'block' : 'hidden'} sm:block flex-1  bg-teal60 p-2`}>
+      <div className=' h-full relative'>
+        {authUser && activeChat ? <h4>{getChatName(authUser, activeChat)}</h4> : <h4>Choose a chat to start!</h4>}
+        {messages.length ? (
+          messages.map((message) => (
+            <div key={message._id}>
+              <span>{message.author.username}: </span>
+              <span>{message.content}</span>
+            </div>
+          ))
+        ) : (
+          <p>No Messages yet</p>
+        )}
+        <MessageForm message={message} setMessage={setMessage} onClick={(e) => sendMessage(e)} />
+      </div>
     </div>
   );
 };

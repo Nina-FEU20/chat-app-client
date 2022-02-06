@@ -2,6 +2,8 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     colors: {
+      teal60: '#e4f0f0b9',
+      teal50: '#f3f7f7ab',
       teal100: '#DFEFEF',
       teal200: '#A2D2D2',
       teal300: '#488D8D',

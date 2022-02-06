@@ -6,7 +6,7 @@ import avatar from '../assets/avatar.png';
 import Button from './Button';
 import AccountModal from './AccountModal';
 
-const Nav = () => {
+const Nav = ({ classnames }) => {
   const [open, setOpen] = useState(false);
   const { authUser, setAuthUser } = AuthState();
 
@@ -26,20 +26,20 @@ const Nav = () => {
   };
 
   return (
-    <div className='container mx-auto  w-[90vw] max-w-[1400px]'>
-      <div className='flex justify-between items-center py-4'>
+    <div className={`container mx-auto max-w-[1980px] ${classnames}`}>
+      <div className='flex justify-between items-center py-6'>
         <div className='flex items-center'>
           <BsChatDotsFill className='text-teal200 text-5xl' />
           <h2 className='pl-2 text-2xl'>Talk Daily</h2>
         </div>
 
         {authUser ? (
-          <div className='flex space-x-2 sm:space-x-6 align-items'>
-            <img src={avatar} alt='avatar' className='h-10' />
+          <div className='flex space-x-2 sm:space-x-6 items-center'>
+            <img src={avatar} alt='avatar' className='h-10 border border-teal200 rounded-full p-[1px]' />
             <Button onClick={(e) => handleSignOut(e)}>Logout</Button>
           </div>
         ) : (
-          <div className='flex space-x-2 sm:space-x-6 align-items'>
+          <div className='flex space-x-2 sm:space-x-6 items-center'>
             <Button onClick={() => setOpen('create')}>Sign up</Button>
             <Button filled={true} onClick={() => setOpen('login')}>
               Log in

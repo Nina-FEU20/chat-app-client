@@ -9,7 +9,6 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <Nav />
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/chat' element={<ChatPage />} />
