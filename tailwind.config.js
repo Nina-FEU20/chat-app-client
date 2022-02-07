@@ -14,6 +14,7 @@ module.exports = {
       pinkgrey: '#c0a8c92b',
       red: '#FF0000',
       white: '#FFFFFF',
+      whiteOpacity: '#ffffff83',
     },
     extend: {
       backgroundImage: {

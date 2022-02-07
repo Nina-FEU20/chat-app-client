@@ -48,9 +48,9 @@ const ChatRoom = () => {
   // max-h-[calc(100vh-6.15rem)]
 
   return (
-    <div className={` ${activeChat ? 'block' : 'hidden'} sm:block  flex-1 bg-teal60 `}>
+    <div className={` ${activeChat ? 'block' : 'hidden'} sm:block  flex-1 bg-whiteOpacity `}>
       <div className=' h-full relative'>
-        {activeChat ? (
+        {activeChat && authUser ? (
           <>
             <div className='h-16 flex items-center justify-between px-4'>
               <div className='flex-1'>
@@ -64,8 +64,10 @@ const ChatRoom = () => {
               </div>
             </div>
 
-            <div className=' h-full overflow-y-scroll pb-20 p-4 max-h-[calc(100vh-10.4rem)] flex flex-col justify-end'>
-              {messages.length ? messages.map((message) => <Message message={message} key={message._id} />) : <p>No Messages yet</p>}
+            <div className='scroll-bar h-full overflow-y-scroll pb-20 p-4 max-h-[calc(100vh-14.9rem)] '>
+              <div className='flex flex-col justify-end min-h-full'>
+                {messages.length ? messages.map((message) => <Message message={message} key={message._id} />) : <p>No Messages yet</p>}
+              </div>
             </div>
 
             <MessageForm message={message} setMessage={setMessage} onChange={(e) => setMessage(e.target.value)} onClick={(e) => sendMessage(e)} />
