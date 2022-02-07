@@ -50,7 +50,7 @@ const ChatRoom = () => {
   return (
     <div className={` ${activeChat ? 'block' : 'hidden'} sm:block  flex-1 bg-teal60 `}>
       <div className=' h-full relative'>
-        {activeChat && (
+        {activeChat ? (
           <>
             <div className='h-16 flex items-center justify-between px-4'>
               <div className='flex-1'>
@@ -64,12 +64,16 @@ const ChatRoom = () => {
               </div>
             </div>
 
-            <div className=' h-full overflow-y-scroll pb-20 p-4 max-h-[calc(100vh-10.4rem)] '>
+            <div className=' h-full overflow-y-scroll pb-20 p-4 max-h-[calc(100vh-10.4rem)] flex flex-col justify-end'>
               {messages.length ? messages.map((message) => <Message message={message} key={message._id} />) : <p>No Messages yet</p>}
             </div>
 
             <MessageForm message={message} setMessage={setMessage} onChange={(e) => setMessage(e.target.value)} onClick={(e) => sendMessage(e)} />
           </>
+        ) : (
+          <div className='h-full flex justify-center items-center'>
+            <h4 className='text-3xl font-semibold flex-1 text-center'>Click on a chat to start!</h4>
+          </div>
         )}
       </div>
     </div>
