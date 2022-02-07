@@ -48,11 +48,11 @@ const ChatRoom = () => {
   // max-h-[calc(100vh-6.15rem)]
 
   return (
-    <div className={` ${activeChat ? 'block' : 'hidden'} sm:block  flex-1 bg-whiteOpacity `}>
+    <div className={` ${activeChat ? 'block' : 'hidden'} sm:block  flex-1 bg-teal50 `}>
       <div className=' h-full relative'>
         {activeChat && authUser ? (
           <>
-            <div className='h-16 flex items-center justify-between px-4'>
+            <div className='h-16 flex items-center justify-between px-4 border-b-2 border-teal200'>
               <div className='flex-1'>
                 <Button classnames='sm:hidden flex items-center' onClick={() => setActiveChat('')}>
                   <BiArrowBack className='mr-1' /> <span className='text-sm'>My chats</span>

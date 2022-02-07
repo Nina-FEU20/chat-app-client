@@ -37,7 +37,9 @@ const MyChats = () => {
   }, []);
 
   return (
-    <div className={` ${activeChat ? 'hidden' : 'flex'} sm:flex  w-full sm:w-[45%] md:w-[320px] max-w-full  bg-teal50 border-r-2 border-teal200`}>
+    <div
+      className={` ${activeChat ? 'hidden' : 'flex'} sm:flex  w-full sm:w-[45%] md:w-[320px] max-w-full bg-whiteOpacity border-r-2 border-teal200`}
+    >
       <div className='w-full'>
         <div className='flex justify-between w-full items-end mb-4 p-4'>
           <h3 className='text-2xl font-bold '>My Chats</h3>
