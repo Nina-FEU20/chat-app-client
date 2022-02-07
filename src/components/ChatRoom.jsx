@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getChatName } from '../utils/ChatUtils';
 import { AuthState } from '../context/AuthContext';
-import Input from './Input';
-import Button from './Button';
 import MessageForm from './MessageForm';
+import Message from './Message';
+import { BiArrowBack } from 'react-icons/bi';
+import { AiOutlineInfoCircle } from 'react-icons/ai';
+import Button from './Button';
 
 const ChatRoom = () => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState([]);
-  const { authUser, activeChat } = AuthState('');
+  const { authUser, activeChat, setActiveChat } = AuthState('');
 
   useEffect(() => {
     (async () => {
@@ -26,7 +28,6 @@ const ChatRoom = () => {
 
   const sendMessage = async (e) => {
     e.preventDefault();
-    console.log(message);
 
     if (message.length > 0) {
       try {
@@ -35,30 +36,41 @@ const ChatRoom = () => {
           { content: message, chatId: activeChat._id },
           { withCredentials: true }
         );
-        console.log(data);
+
         setMessages([...messages, data]);
         setMessage('');
-      } catch {
-        console.log('Could not send message...');
+      } catch (err) {
+        console.log(err);
       }
     }
   };
 
+  // max-h-[calc(100vh-6.15rem)]
+
   return (
-    <div className={` ${activeChat ? 'block' : 'hidden'} sm:block flex-1  bg-teal60 p-2`}>
+    <div className={` ${activeChat ? 'block' : 'hidden'} sm:block  flex-1 bg-teal60 `}>
       <div className=' h-full relative'>
-        {authUser && activeChat ? <h4>{getChatName(authUser, activeChat)}</h4> : <h4>Choose a chat to start!</h4>}
-        {messages.length ? (
-          messages.map((message) => (
-            <div key={message._id}>
-              <span>{message.author.username}: </span>
-              <span>{message.content}</span>
+        {activeChat && (
+          <>
+            <div className='h-16 flex items-center justify-between px-4'>
+              <div className='flex-1'>
+                <Button classnames='sm:hidden flex items-center' onClick={() => setActiveChat('')}>
+                  <BiArrowBack className='mr-1' /> <span className='text-sm'>My chats</span>
+                </Button>
+              </div>
+              <h4 className=' text-2xl font-semibold flex-1 text-center '>{getChatName(authUser, activeChat)}</h4>
+              <div className='flex-1  mr-1'>
+                <AiOutlineInfoCircle className='float-right text-4xl' />
+              </div>
             </div>
-          ))
-        ) : (
-          <p>No Messages yet</p>
+
+            <div className=' h-full overflow-y-scroll pb-20 p-4 max-h-[calc(100vh-10.4rem)] '>
+              {messages.length ? messages.map((message) => <Message message={message} key={message._id} />) : <p>No Messages yet</p>}
+            </div>
+
+            <MessageForm message={message} setMessage={setMessage} onChange={(e) => setMessage(e.target.value)} onClick={(e) => sendMessage(e)} />
+          </>
         )}
-        <MessageForm message={message} setMessage={setMessage} onClick={(e) => sendMessage(e)} />
       </div>
     </div>
   );

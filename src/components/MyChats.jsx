@@ -25,7 +25,6 @@ const MyChats = () => {
     (async () => {
       try {
         const { data } = await axios.get('http://localhost:5000/api/chat', { withCredentials: true });
-        console.log(data);
         setChats(data);
       } catch (error) {
         console.log(error);
@@ -54,7 +53,7 @@ const MyChats = () => {
             <div
               key={chat._id}
               onClick={() => handleClick(chat._id)}
-              className='py-2 px-4 cursor-pointer hover:bg-teal200 hover:scale-105 rounded-md flex items-center transition ease-in duration-200 '
+              className='py-2 px-4 cursor-pointer hover:bg-teal200 rounded-md flex items-center transition ease-in duration-200 '
             >
               <img src={avatar} alt='avatar' className='w-7 h-7 rounded-full mr-3 ' />
               <div>

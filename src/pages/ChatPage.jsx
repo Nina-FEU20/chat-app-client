@@ -16,7 +16,7 @@ const ChatPage = () => {
 
   return (
     <>
-      <div className='container mx-auto max-w-[1980px] h-full min-h-72 shadow-md shadow-teal200 flex flex-col '>
+      <div className='container mx-auto max-w-[1980px] h-full min-h-72 max-h-screen shadow-md shadow-teal200 flex flex-col'>
         <Nav classnames={`px-6 border-b-2 border-teal200`} />
         <div className='flex space-between flex-1'>
           <MyChats />

@@ -18,7 +18,7 @@ const HomePage = () => {
   return (
     <>
       <Nav classnames={`w-[90vw]`} />
-      <div className='container mx-auto relative w-[90vw] max-w-[1980px]'>
+      <div className='container mx-auto relative w-[90vw] max-w-[1980px] '>
         <div className='flex flex-wrap md:flex-nowrap justify-between'>
           <div className='mt-0 mt-14 lg:mt-20'>
             <h1 className='font-bold text-4xl sm:text-6xl lg:text-7xl mb-6'>Hello, let's talk!</h1>
