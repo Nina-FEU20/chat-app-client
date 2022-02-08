@@ -40,11 +40,12 @@ const Message = ({ message, messages }) => {
       >
         {!isAuthor && <p className='text-sm font-semibold mb-1'>{message.author.username} </p>}
         <p className='mb-1'>{message.content}</p>
-        {isMoreThanOneDayAgo() ? (
-          <p className='text-xs'>{format(new Date(message.createdAt), 'yyyy-MM-dd hh:mm')}</p>
-        ) : (
-          <p className='text-right pr-2 text-xs'>{formatDistanceStrict(new Date(message.createdAt), new Date())} ago</p>
-        )}
+
+        <p className='text-xs pr-2 text-right'>
+          {isMoreThanOneDayAgo()
+            ? format(new Date(message.createdAt), 'yyyy-MM-dd hh:mm')
+            : formatDistanceStrict(new Date(message.createdAt), new Date()) + ' ago'}
+        </p>
       </div>
     </div>
   );

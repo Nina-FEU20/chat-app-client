@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { AuthState } from '../context/AuthContext';
 import { getChatName } from '../utils/ChatUtils';
 import Button from './Button';
-import CreateGroupChat from './CreateGroupChat';
+import CreateChat from './CreateChat';
 import { BiMessageRoundedAdd } from 'react-icons/bi';
 import avatar from '../assets/avatar.png';
 
@@ -67,7 +67,7 @@ const MyChats = () => {
             </div>
           ))}
       </div>
-      {isModalOpen && <CreateGroupChat setModalOpen={setModalOpen} setChats={setChats} chats={chats} />}
+      {isModalOpen && <CreateChat setModalOpen={setModalOpen} setChats={setChats} chats={chats} />}
     </div>
   );
 };

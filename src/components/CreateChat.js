@@ -3,8 +3,10 @@ import Modal from './Modal';
 import Users from './Users';
 import axios from 'axios';
 import { AuthState } from '../context/AuthContext';
+import Button from './Button';
+import { MdClose } from 'react-icons/md';
 
-const CreateGroupChat = ({ setModalOpen, setChats, chats }) => {
+const CreateChat = ({ setModalOpen, setChats, chats }) => {
   const [users, setUsers] = useState([]);
 
   const { setActiveChat } = AuthState();
@@ -52,19 +54,30 @@ const CreateGroupChat = ({ setModalOpen, setChats, chats }) => {
     const updatedArray = users.filter((user) => user._id !== removedUser._id);
     setUsers(updatedArray);
   };
+
   return (
     <Modal setModalOpen={setModalOpen}>
-      <div>Create Chat</div>
-      <Users setUsers={setUsers} updateUsers={updateUsers} />
-      {users.map((user) => (
+      <div className='w-[24rem] min-h-[10rem] flex flex-col'>
         <div>
-          <span>{user.username}</span>
-          <i onClick={() => handleRemoveFromUsers(user)}>X</i>
+          <h3 className='text-center text-2xl text-teal500 mb-2'>Create Chat</h3>
         </div>
-      ))}
-      <button onClick={createChat}>Create Chat</button>
+        <Users setUsers={setUsers} updateUsers={updateUsers} />
+        <ul className='flex flex-wrap pl-1'>
+          {users.map((user) => (
+            <li key={user._id} className='flex items-center bg-teal200 w-fit py-1 px-2 rounded-md mt-2 mr-2'>
+              <span className='pr-2'>{user.username}</span>
+              <button className='' onClick={() => handleRemoveFromUsers(user)}>
+                <MdClose />
+              </button>
+            </li>
+          ))}
+        </ul>
+        <Button onClick={createChat} classnames='mt-12' filled='true'>
+          Create Chat
+        </Button>
+      </div>
     </Modal>
   );
 };
 
-export default CreateGroupChat;
+export default CreateChat;

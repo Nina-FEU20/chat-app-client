@@ -32,22 +32,8 @@ const Login = ({ setOpen }) => {
   };
 
   useKeyDownListener(handleSubmit);
-  // console.log(username);
-  // console.log(password);
-  const { setAuthUser } = AuthState();
 
-  // useEffect(() => {
-  //   const listener = (event) => {
-  //     if (event.code === 'Enter' || event.code === 'NumpadEnter') {
-  //       console.log('Enter key was pressed. Run your function.');
-  //       handleSubmit(event);
-  //     }
-  //   };
-  //   document.addEventListener('keydown', listener);
-  //   return () => {
-  //     document.removeEventListener('keydown', listener);
-  //   };
-  // });
+  const { setAuthUser } = AuthState();
 
   return (
     <div>
