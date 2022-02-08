@@ -30,7 +30,7 @@ const Nav = ({ classnames }) => {
       <div className='flex justify-between items-center py-6'>
         <div className='flex items-center'>
           <BsChatDotsFill className='text-teal200 text-5xl' />
-          <h2 className='pl-2 text-2xl'>Talk Daily</h2>
+          <h2 className='pl-2 text-xl sm:text-2xl'>Talk Daily</h2>
         </div>
 
         {authUser ? (

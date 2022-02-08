@@ -51,21 +51,29 @@ const ChatRoom = () => {
         {activeChat && authUser ? (
           <>
             <div className='h-16 flex items-center justify-between px-4 border-b-2 border-teal200'>
-              <div className='flex-1'>
+              <div className=''>
                 <Button classnames='sm:hidden flex items-center' onClick={() => setActiveChat('')}>
-                  <BiArrowBack className='mr-1' /> <span className='text-sm'>Chats</span>
+                  <BiArrowBack className='mr-1' />
                 </Button>
               </div>
-              <h4 className='text-xl sm:text-2xl font-semibold flex-1 text-center '>{getChatName(authUser, activeChat)}</h4>
-              <div className='flex-1  mr-1'>
-                <AiOutlineInfoCircle className='float-right text-4xl' />
+              <h4 className='text-lg sm:text-2xl font-semibold text-center'>{getChatName(authUser, activeChat)}</h4>
+              <div className='  sm:mr-1'>
+                <AiOutlineInfoCircle className='float-right text-2xl sm:text-4xl' />
               </div>
             </div>
 
             <div className='scroll-bar h-full overflow-y-scroll pb-20 p-4 max-h-[calc(100vh-14.9rem)] '>
-              <div className='flex flex-col justify-end min-h-full'>
-                {messages.length ? messages.map((message) => <Message message={message} key={message._id} />) : <p>No Messages yet</p>}
-              </div>
+              {messages.length > 0 ? (
+                <div className='flex flex-col justify-end min-h-full'>
+                  {messages.map((message) => (
+                    <Message message={message} key={message._id} />
+                  ))}
+                </div>
+              ) : (
+                <div className='flex justify-center min-h-full items-center'>
+                  <p className='text-3xl font-semibold text-center'>No Messages yet</p>
+                </div>
+              )}
             </div>
 
             <MessageForm message={message} setMessage={setMessage} onChange={(e) => setMessage(e.target.value)} onClick={(e) => sendMessage(e)} />

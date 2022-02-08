@@ -10,6 +10,7 @@ import Input from '../Input';
 const CreateChat = ({ setModalOpen, setChats, chats }) => {
   const [users, setUsers] = useState([]);
   const [chatName, setChatName] = useState([]);
+  const [error, setError] = useState('');
 
   const { setActiveChat } = AuthState();
 
@@ -28,6 +29,12 @@ const CreateChat = ({ setModalOpen, setChats, chats }) => {
       }
 
       if (users.length > 1) {
+        if (chatName.length <= 0) {
+          console.log('namn: ' + chatName);
+          setError('To create a GroupChat you must give it a name!');
+          return;
+        }
+
         const { data } = await axios.post('http://localhost:5000/api/chat/group', { users: users, name: chatName }, { withCredentials: true });
 
         setChats([data, ...chats]);
@@ -59,7 +66,7 @@ const CreateChat = ({ setModalOpen, setChats, chats }) => {
 
   return (
     <Modal setModalOpen={setModalOpen}>
-      <div className='w-[24rem] min-h-[10rem] flex flex-col'>
+      <div className='w-[80vw] max-w-[24rem] min-h-[10rem] flex flex-col'>
         <div>
           <h3 className='text-center text-2xl text-teal500 mb-2'>Create Chat</h3>
         </div>
@@ -75,14 +82,17 @@ const CreateChat = ({ setModalOpen, setChats, chats }) => {
           ))}
         </ul>
         {users.length > 1 && (
-          <Input
-            name='chatname'
-            type='text'
-            value={chatName}
-            placeholder='Add a name for your chat!'
-            label='Group Name'
-            onChange={(e) => setChatName(e.target.value)}
-          />
+          <>
+            <Input
+              name='chatname'
+              type='text'
+              value={chatName}
+              placeholder='Add a name for your chat!'
+              label='Group Name'
+              onChange={(e) => setChatName(e.target.value)}
+            />
+            <p className='text-red font-medium text-sm mt-2'>{error && '* ' + error}</p>
+          </>
         )}
         <Button onClick={createChat} classnames='mt-10' filled='true'>
           Create Chat
