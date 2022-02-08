@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { AuthState } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import ChatRoom from '../components/ChatRoom';
-
-import MyChats from '../components/MyChats';
+import ChatRoom from '../components/chat/ChatRoom';
+import MyChats from '../components/chat/MyChats';
 import Nav from '../components/Nav';
 
 const ChatPage = () => {

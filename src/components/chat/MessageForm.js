@@ -1,7 +1,7 @@
 import React from 'react';
 import { BiSend } from 'react-icons/bi';
-import Button from './Button';
-import Input from './Input';
+import Button from '../Button';
+import Input from '../Input';
 
 const MessageForm = ({ message, onClick, onChange }) => {
   return (

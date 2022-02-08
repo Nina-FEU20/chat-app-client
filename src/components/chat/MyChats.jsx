@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { AuthState } from '../context/AuthContext';
-import { getChatName } from '../utils/ChatUtils';
-import Button from './Button';
+import { AuthState } from '../../context/AuthContext';
+import { getChatName } from '../../utils/ChatUtils';
+import Button from '../Button';
 import CreateChat from './CreateChat';
 import { BiMessageRoundedAdd } from 'react-icons/bi';
-import avatar from '../assets/avatar.png';
+import avatar from '../../assets/avatar.png';
 
 const MyChats = () => {
   const { authUser, setActiveChat, activeChat } = AuthState();
@@ -38,7 +38,9 @@ const MyChats = () => {
 
   return (
     <div
-      className={` ${activeChat ? 'hidden' : 'flex'} sm:flex  w-full sm:w-[45%] md:w-[320px] max-w-full bg-whiteOpacity border-r-2 border-teal200`}
+      className={` ${
+        activeChat ? 'hidden' : 'flex'
+      } sm:flex  w-full sm:w-[50%] md:w-[350px] lg:w-[400px] max-w-full bg-whiteOpacity border-r-2 border-teal200`}
     >
       <div className='w-full'>
         <div className='flex justify-between w-full items-end mb-4 p-4'>

@@ -1,6 +1,6 @@
-import { AuthState } from '../context/AuthContext';
+import { AuthState } from '../../context/AuthContext';
 import React, { useEffect, useState, useRef } from 'react';
-import avatar from '../assets/avatar.png';
+import avatar from '../../assets/avatar.png';
 import { format, formatDistanceStrict } from 'date-fns';
 
 const Message = ({ message, messages }) => {

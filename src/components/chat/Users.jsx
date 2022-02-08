@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DebounceInput } from 'react-debounce-input';
 import axios from 'axios';
-import avatar from '../assets/avatar.png';
+import avatar from '../../assets/avatar.png';
 
 const Users = ({ updateUsers, users }) => {
   const [searchResult, setSearchResult] = useState([]);

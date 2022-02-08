@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { getChatName } from '../utils/ChatUtils';
-import { AuthState } from '../context/AuthContext';
+import { getChatName } from '../../utils/ChatUtils';
+import { AuthState } from '../../context/AuthContext';
 import MessageForm from './MessageForm';
 import Message from './Message';
 import { BiArrowBack } from 'react-icons/bi';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
-import Button from './Button';
+import Button from '../Button';
 
 const ChatRoom = () => {
   const [messages, setMessages] = useState([]);
@@ -45,8 +45,6 @@ const ChatRoom = () => {
     }
   };
 
-  // max-h-[calc(100vh-6.15rem)]
-
   return (
     <div className={` ${activeChat ? 'block' : 'hidden'} sm:block  flex-1 bg-teal50 `}>
       <div className=' h-full relative'>
@@ -55,10 +53,10 @@ const ChatRoom = () => {
             <div className='h-16 flex items-center justify-between px-4 border-b-2 border-teal200'>
               <div className='flex-1'>
                 <Button classnames='sm:hidden flex items-center' onClick={() => setActiveChat('')}>
-                  <BiArrowBack className='mr-1' /> <span className='text-sm'>My chats</span>
+                  <BiArrowBack className='mr-1' /> <span className='text-sm'>Chats</span>
                 </Button>
               </div>
-              <h4 className=' text-2xl font-semibold flex-1 text-center '>{getChatName(authUser, activeChat)}</h4>
+              <h4 className='text-xl sm:text-2xl font-semibold flex-1 text-center '>{getChatName(authUser, activeChat)}</h4>
               <div className='flex-1  mr-1'>
                 <AiOutlineInfoCircle className='float-right text-4xl' />
               </div>

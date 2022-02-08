@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import Modal from './Modal';
+import Modal from '../Modal';
 import Users from './Users';
 import axios from 'axios';
-import { AuthState } from '../context/AuthContext';
-import Button from './Button';
+import { AuthState } from '../../context/AuthContext';
+import Button from '../Button';
 import { MdClose } from 'react-icons/md';
+import Input from '../Input';
 
 const CreateChat = ({ setModalOpen, setChats, chats }) => {
   const [users, setUsers] = useState([]);
+  const [chatName, setChatName] = useState([]);
 
   const { setActiveChat } = AuthState();
 
@@ -26,7 +28,7 @@ const CreateChat = ({ setModalOpen, setChats, chats }) => {
       }
 
       if (users.length > 1) {
-        const { data } = await axios.post('http://localhost:5000/api/chat/group', { users: users }, { withCredentials: true });
+        const { data } = await axios.post('http://localhost:5000/api/chat/group', { users: users, name: chatName }, { withCredentials: true });
 
         setChats([data, ...chats]);
         setActiveChat(data);
@@ -62,7 +64,7 @@ const CreateChat = ({ setModalOpen, setChats, chats }) => {
           <h3 className='text-center text-2xl text-teal500 mb-2'>Create Chat</h3>
         </div>
         <Users setUsers={setUsers} updateUsers={updateUsers} />
-        <ul className='flex flex-wrap pl-1'>
+        <ul className='flex flex-wrap pl-1 mb-4'>
           {users.map((user) => (
             <li key={user._id} className='flex items-center bg-teal200 w-fit py-1 px-2 rounded-md mt-2 mr-2'>
               <span className='pr-2'>{user.username}</span>
@@ -72,7 +74,17 @@ const CreateChat = ({ setModalOpen, setChats, chats }) => {
             </li>
           ))}
         </ul>
-        <Button onClick={createChat} classnames='mt-12' filled='true'>
+        {users.length > 1 && (
+          <Input
+            name='chatname'
+            type='text'
+            value={chatName}
+            placeholder='Add a name for your chat!'
+            label='Group Name'
+            onChange={(e) => setChatName(e.target.value)}
+          />
+        )}
+        <Button onClick={createChat} classnames='mt-10' filled='true'>
           Create Chat
         </Button>
       </div>
