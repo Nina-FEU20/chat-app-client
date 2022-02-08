@@ -35,17 +35,19 @@ const Message = ({ message, messages }) => {
       {!isAuthor && <img src={avatar} alt='' className='w-8 h-8 rounded-full mr-2' />}
       <div
         className={`${
-          isAuthor ? 'bg-teal200 rounded-bl-[2rem] rounded-t-xl' : 'bg-pink100 rounded-br-[2rem] rounded-t-xl'
-        } p-3 max-w-[70%] min-w-[10rem] flex flex-col`}
+          isAuthor ? 'bg-teal150 rounded-bl-xl rounded-t-xl' : 'bg-pinkLight rounded-br-xl rounded-t-xl'
+        } py-2 px-4 md:max-w-[70%] max-w-[90%] min-w-[12rem] flex flex-col shadow-md`}
       >
-        {!isAuthor && <p className='text-sm font-semibold mb-1'>{message.author.username} </p>}
-        <p className='mb-1'>{message.content}</p>
+        <div className='flex items-center mb-1 '>
+          <p className='text-sm font-semibold pr-2 text-teal600'>{!isAuthor ? message.author.username : 'You'}</p>
+          <p className='text-xs pr-2 text-right text-teal500'>
+            {isMoreThanOneDayAgo()
+              ? format(new Date(message.createdAt), 'yyyy-MM-dd HH:mm')
+              : formatDistanceStrict(new Date(message.createdAt), new Date()) + ' ago'}
+          </p>
+        </div>
 
-        <p className='text-xs pr-2 text-right'>
-          {isMoreThanOneDayAgo()
-            ? format(new Date(message.createdAt), 'yyyy-MM-dd hh:mm')
-            : formatDistanceStrict(new Date(message.createdAt), new Date()) + ' ago'}
-        </p>
+        <p className='text-teal600 text-sm'>{message.content}</p>
       </div>
     </div>
   );

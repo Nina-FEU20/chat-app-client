@@ -2,9 +2,11 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     colors: {
+      whiteTeal: '#fdfdfdeb',
       teal60: '#e4f0f0b9',
       teal50: '#f3f7f7ab',
       teal100: '#DFEFEF',
+      teal150: '#c5e2e2',
       teal200: '#A2D2D2',
       teal300: '#488D8D',
       teal400: '#316464',
@@ -12,10 +14,11 @@ module.exports = {
       teal600: '#0A0E0E',
       pink100: '#dac4e2',
       pink200: '#C0A8C9',
+      pinkLight: '#fbf0ff',
       pinkgrey: '#c0a8c92b',
       red: '#FF0000',
       white: '#FFFFFF',
-      whiteOpacity: '#ffffff83',
+      whiteOpacity: '#ffffffdd',
     },
     extend: {
       backgroundImage: {

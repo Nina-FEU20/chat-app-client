@@ -46,23 +46,23 @@ const ChatRoom = () => {
   };
 
   return (
-    <div className={` ${activeChat ? 'block' : 'hidden'} sm:block  flex-1 bg-teal50 `}>
+    <div className={` ${activeChat ? 'block' : 'hidden'} sm:block  flex-1 bg-whiteTeal `}>
       <div className=' h-full relative'>
         {activeChat && authUser ? (
           <>
-            <div className='h-16 flex items-center justify-between px-4 border-b-2 border-teal200'>
+            <div className='h-12 2xl:h-16 flex items-center justify-between px-4 border-b-2 border-pinkgrey'>
               <div className=''>
                 <Button classnames='sm:hidden flex items-center' onClick={() => setActiveChat('')}>
                   <BiArrowBack className='mr-1' />
                 </Button>
               </div>
-              <h4 className='text-lg sm:text-2xl font-semibold text-center'>{getChatName(authUser, activeChat)}</h4>
+              <h4 className='text-lg sm:text-xl 2xl:text-2xl font-semibold text-center'>{getChatName(authUser, activeChat)}</h4>
               <div className='  sm:mr-1'>
-                <AiOutlineInfoCircle className='float-right text-2xl sm:text-4xl' />
+                <AiOutlineInfoCircle className='float-right text-2xl xl:text-3xl text-teal400' />
               </div>
             </div>
 
-            <div className='scroll-bar h-full overflow-y-scroll pb-20 p-4 max-h-[calc(100vh-14.9rem)] '>
+            <div className='scroll-bar h-full overflow-y-scroll p-4 2xl:pb-10 max-h-[calc(100vh-12rem)] '>
               {messages.length > 0 ? (
                 <div className='flex flex-col justify-end min-h-full'>
                   {messages.map((message) => (
