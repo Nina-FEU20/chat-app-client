@@ -7,15 +7,15 @@ const Message = ({ message, messages }) => {
   const { authUser } = AuthState();
   const [isAuthor, setIsAuthor] = useState(false);
 
-  const messagesEndRef = useRef(null);
+  // const messagesEndRef = useRef(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  // const scrollToBottom = () => {
+  //   messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  // };
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [message]);
+  // useEffect(() => {
+  //   scrollToBottom();
+  // }, [message]);
 
   useEffect(() => {
     if (authUser.id === message.author._id) setIsAuthor(true);
@@ -31,7 +31,7 @@ const Message = ({ message, messages }) => {
   isMoreThanOneDayAgo();
 
   return (
-    <div className={`${isAuthor ? ' justify-end' : ''} py-2 flex items-end `} ref={messagesEndRef}>
+    <div className={`${isAuthor ? ' justify-end' : ''} py-2 flex items-end `} key={message._id}>
       {!isAuthor && <img src={avatar} alt='' className='w-8 h-8 rounded-full mr-2' />}
       <div
         className={`${

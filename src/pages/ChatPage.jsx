@@ -6,7 +6,7 @@ import MyChats from '../components/chat/MyChats';
 import Nav from '../components/Nav';
 
 const ChatPage = () => {
-  const { authUser } = AuthState();
+  const { authUser, activeChat } = AuthState();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const ChatPage = () => {
         <Nav classnames={`px-6 border-b-2 border-pinkgrey`} />
         <div className='flex space-between flex-1'>
           <MyChats />
-          <ChatRoom />
+          <ChatRoom activeChat={activeChat} />
         </div>
       </div>
       <footer className='max-h-screen min-h-[500px] 2xl:min-h-[1000px] top-0 absolute bg-[url("/src/assets/waves-transparent.svg")] bg-bottom h-full bg-no-repeat bg-cover -z-40 w-full'></footer>

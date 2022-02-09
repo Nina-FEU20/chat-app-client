@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { getChatName } from '../../utils/ChatUtils';
 import { AuthState } from '../../context/AuthContext';
@@ -7,11 +7,27 @@ import Message from './Message';
 import { BiArrowBack } from 'react-icons/bi';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import Button from '../Button';
+import io from 'socket.io-client';
+
+let socket;
 
 const ChatRoom = () => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState([]);
-  const { authUser, activeChat, setActiveChat } = AuthState('');
+
+  const { authUser, setActiveChat, activeChat } = AuthState();
+  const activeChatRef = React.useRef(activeChat);
+
+  useEffect(() => {
+    socket = io('http://localhost:5000');
+    socket.on('connection');
+    socket.on('message', (msg) => {
+      console.log(msg);
+    });
+
+    console.log('Socket is connected');
+    return () => socket.disconnect();
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -19,12 +35,27 @@ const ChatRoom = () => {
         try {
           const { data } = await axios.get(`http://localhost:5000/api/message/${activeChat._id}`, { withCredentials: true });
           setMessages(data);
+          socket.emit('join room', activeChat._id, authUser);
         } catch (error) {
           console.log(error);
         }
       }
     })();
+
+    activeChatRef.current = activeChat;
+
+    console.log('i Run!');
   }, [activeChat]);
+
+  useEffect(() => {
+    socket.on('new message', (msg) => {
+      if (activeChatRef.current._id === msg.chat) {
+        setMessages((messages) => [...messages, msg]);
+      } else {
+        console.log('You recieved a message in another room!');
+      }
+    });
+  }, []);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -38,12 +69,23 @@ const ChatRoom = () => {
         );
 
         setMessages([...messages, data]);
+        socket.emit('send message', data);
         setMessage('');
       } catch (err) {
         console.log(err);
       }
     }
   };
+
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   return (
     <div className={` ${activeChat ? 'block' : 'hidden'} sm:block  flex-1 bg-whiteTeal `}>
@@ -74,6 +116,7 @@ const ChatRoom = () => {
                   <p className='text-3xl font-semibold text-center'>No Messages yet</p>
                 </div>
               )}
+              <div ref={messagesEndRef}></div>
             </div>
 
             <MessageForm message={message} setMessage={setMessage} onChange={(e) => setMessage(e.target.value)} onClick={(e) => sendMessage(e)} />
