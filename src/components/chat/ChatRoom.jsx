@@ -11,7 +11,7 @@ import io from 'socket.io-client';
 
 let socket;
 
-const ChatRoom = () => {
+const ChatRoom = ({ chats }) => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState([]);
 
@@ -20,14 +20,19 @@ const ChatRoom = () => {
 
   useEffect(() => {
     socket = io('http://localhost:5000', { withCredentials: true });
-    socket.on('connection');
-    socket.on('message', (msg) => {
-      console.log(msg);
+    socket.on('connection', () => {
+      console.log('Socket is connected');
     });
 
-    console.log('Socket is connected');
-    return () => socket.disconnect();
+    return () =>
+      socket.on('disconnect', () => {
+        console.log('you got disconnected');
+      });
   }, []);
+
+  useEffect(() => {
+    chats.forEach((chat) => socket.emit('join room', chat._id, authUser));
+  }, [chats]);
 
   useEffect(() => {
     (async () => {
@@ -35,7 +40,6 @@ const ChatRoom = () => {
         try {
           const { data } = await axios.get(`http://localhost:5000/api/message/${activeChat._id}`, { withCredentials: true });
           setMessages(data);
-          socket.emit('join room', activeChat._id, authUser);
         } catch (error) {
           console.log(error);
         }
@@ -46,19 +50,13 @@ const ChatRoom = () => {
   }, [activeChat]);
 
   useEffect(() => {
-    console.log('hey');
     socket.on('new message', (msg) => {
-      console.log(msg);
-      if (activeChatRef.current._id === msg.chat) {
+      if (activeChatRef.current && activeChatRef.current._id === msg.chat) {
         setMessages((messages) => [...messages, msg]);
       } else {
         console.log('You recieved a message in another room!');
       }
     });
-
-    // socket.on('my message', (msg) => {
-    //   setMessages((messages) => [...messages, msg]);
-    // });
   }, []);
 
   const sendMessage = async (e) => {
@@ -66,13 +64,6 @@ const ChatRoom = () => {
 
     if (message.length > 0) {
       try {
-        // const { data } = await axios.post(
-        //   `http://localhost:5000/api/message`,
-        //   { content: message, chatId: activeChat._id },
-        //   { withCredentials: true }
-        // );
-
-        // setMessages([...messages, data]);
         socket.emit('send message', message, activeChat._id);
         setMessage('');
       } catch (err) {

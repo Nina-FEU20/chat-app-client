@@ -7,9 +7,9 @@ import CreateChat from './CreateChat';
 import { BiMessageRoundedAdd } from 'react-icons/bi';
 import avatar from '../../assets/avatar.png';
 
-const MyChats = () => {
+const MyChats = ({ chats, setChats }) => {
   const { authUser, setActiveChat, activeChat } = AuthState();
-  const [chats, setChats] = useState([]);
+  // const [chats, setChats] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
 
   const handleClick = async (chatId) => {
