@@ -35,6 +35,7 @@ const Nav = ({ classnames }) => {
 
         {authUser ? (
           <div className='flex space-x-2 sm:space-x-6 items-center'>
+            <p className='font-semibold'>{authUser.username}</p>
             <img src={avatar} alt='avatar' className='h-10 border border-teal200 rounded-full p-[1px]' />
             <Button onClick={(e) => handleSignOut(e)}>Logout</Button>
           </div>

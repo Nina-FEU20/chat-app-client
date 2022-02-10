@@ -19,7 +19,7 @@ const ChatRoom = () => {
   const activeChatRef = React.useRef(activeChat);
 
   useEffect(() => {
-    socket = io('http://localhost:5000');
+    socket = io('http://localhost:5000', { withCredentials: true });
     socket.on('connection');
     socket.on('message', (msg) => {
       console.log(msg);
@@ -43,18 +43,22 @@ const ChatRoom = () => {
     })();
 
     activeChatRef.current = activeChat;
-
-    console.log('i Run!');
   }, [activeChat]);
 
   useEffect(() => {
+    console.log('hey');
     socket.on('new message', (msg) => {
+      console.log(msg);
       if (activeChatRef.current._id === msg.chat) {
         setMessages((messages) => [...messages, msg]);
       } else {
         console.log('You recieved a message in another room!');
       }
     });
+
+    // socket.on('my message', (msg) => {
+    //   setMessages((messages) => [...messages, msg]);
+    // });
   }, []);
 
   const sendMessage = async (e) => {
@@ -62,14 +66,14 @@ const ChatRoom = () => {
 
     if (message.length > 0) {
       try {
-        const { data } = await axios.post(
-          `http://localhost:5000/api/message`,
-          { content: message, chatId: activeChat._id },
-          { withCredentials: true }
-        );
+        // const { data } = await axios.post(
+        //   `http://localhost:5000/api/message`,
+        //   { content: message, chatId: activeChat._id },
+        //   { withCredentials: true }
+        // );
 
-        setMessages([...messages, data]);
-        socket.emit('send message', data);
+        // setMessages([...messages, data]);
+        socket.emit('send message', message, activeChat._id);
         setMessage('');
       } catch (err) {
         console.log(err);
