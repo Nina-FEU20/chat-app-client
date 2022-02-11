@@ -68,11 +68,10 @@ const MyChats = ({}) => {
               <div
                 key={chat._id}
                 onClick={() => handleClick(chat._id)}
-                className={`h-14 2xl:h-16 px-4 cursor-pointer hover:bg-teal100 flex items-center transition ease-in duration-200 border-b border-teal50 ${
-                  chat === chats[0] && 'border-t'
-                }`}
+                className={`h-14 2xl:h-16 px-4 cursor-pointer hover:bg-teal100 flex items-center transition ease-in duration-200 rounded-md ml-1 mb-1 
+               ${activeChat && chat._id === activeChat._id && 'bg-teal100'}`}
               >
-                <img src={avatar} alt='avatar' className='w-6 h-6 2xl:w-8 2xl:h-8 rounded-full mr-4' />
+                <img src={avatar} alt='avatar' className='w-7 h-7 2xl:w-8 2xl:h-8 rounded-full mr-4' />
                 <div className=' space-y-1'>
                   <h4 className='text-sm 2xl:text-base'>{getChatName(authUser, chat)}</h4>
                   <p className='text-xs 2xl:text-sm'>
