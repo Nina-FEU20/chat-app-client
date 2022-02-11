@@ -4,7 +4,6 @@ import Modal from './Modal';
 import Signup from './Signup';
 
 const AccountModal = ({ setOpen, open }) => {
-  console.log(open);
   return (
     <Modal setModalOpen={setOpen}>
       {open === 'create' && <Signup setOpen={setOpen} />}

@@ -7,9 +7,6 @@ import Message from './Message';
 import { BiArrowBack } from 'react-icons/bi';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import Button from '../Button';
-// import io from 'socket.io-client';
-
-// let socket;
 
 import socket from '../../config/socketConfig';
 

@@ -4,6 +4,7 @@ import { AuthState } from '../context/AuthContext';
 import Input from './Input';
 import Button from './Button';
 import { useKeyDownListener } from '../hooks/useListener';
+import socket from '../config/socketConfig';
 
 const Login = ({ setOpen }) => {
   const [username, setUsername] = useState('');
@@ -12,8 +13,6 @@ const Login = ({ setOpen }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e);
-    console.log(password);
 
     if (!password || !username) return setError('All fields are required');
 
@@ -25,6 +24,7 @@ const Login = ({ setOpen }) => {
       setPassword('');
       localStorage.setItem('user', JSON.stringify(data));
       setAuthUser(data);
+      socket.emit('login', data);
       setOpen(null);
     } catch (err) {
       setError(err.response.data);

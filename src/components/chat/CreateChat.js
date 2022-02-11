@@ -6,24 +6,27 @@ import { AuthState } from '../../context/AuthContext';
 import Button from '../Button';
 import { MdClose } from 'react-icons/md';
 import Input from '../Input';
+import socket from '../../config/socketConfig';
 
 const CreateChat = ({ setModalOpen, setChats, chats }) => {
   const [users, setUsers] = useState([]);
   const [chatName, setChatName] = useState([]);
   const [error, setError] = useState('');
 
-  const { setActiveChat } = AuthState();
+  const { setActiveChat, authUser } = AuthState();
 
   const createChat = async () => {
     try {
-      console.log(users.length);
       if (users.length === 0) return;
 
       if (users.length === 1) {
         const { data } = await axios.post('http://localhost:5000/api/chat', { user: users[0] }, { withCredentials: true });
 
         const chatExists = checkExists(chats, data);
-        if (!chatExists) setChats([data, ...chats]);
+        if (!chatExists) {
+          socket.emit('create chat', data, authUser);
+          setChats([data, ...chats]);
+        }
 
         setActiveChat(data);
       }
@@ -38,6 +41,7 @@ const CreateChat = ({ setModalOpen, setChats, chats }) => {
         const { data } = await axios.post('http://localhost:5000/api/chat/group', { users: users, name: chatName }, { withCredentials: true });
 
         setChats([data, ...chats]);
+        socket.emit('create chat', data, authUser);
         setActiveChat(data);
       }
 

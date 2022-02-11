@@ -23,6 +23,13 @@ const MyChats = ({}) => {
   };
 
   useEffect(() => {
+    console.log('Im listening!!');
+    socket.on('created chat', (data) => {
+      setChats((chats) => [data, ...chats]);
+    });
+  }, []);
+
+  useEffect(() => {
     (async () => {
       try {
         const { data } = await axios.get('http://localhost:5000/api/chat', { withCredentials: true });

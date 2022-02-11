@@ -4,6 +4,7 @@ import { AuthState } from '../context/AuthContext';
 import Input from './Input';
 import Button from './Button';
 import { useKeyDownListener } from '../hooks/useListener';
+import socket from '../config/socketConfig';
 
 const Signup = ({ setOpen }) => {
   const [username, setUsername] = useState('');
@@ -38,6 +39,7 @@ const Signup = ({ setOpen }) => {
       setPassword('');
       localStorage.setItem('user', JSON.stringify(data));
       setAuthUser(data);
+      socket.emit('login', data);
       setOpen(null);
     } catch (err) {
       setError(err.response.data);
