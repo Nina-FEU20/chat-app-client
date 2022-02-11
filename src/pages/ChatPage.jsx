@@ -4,18 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import ChatRoom from '../components/chat/ChatRoom';
 import MyChats from '../components/chat/MyChats';
 import Nav from '../components/Nav';
-import io from 'socket.io-client';
 
 const ChatPage = () => {
   const { authUser, activeChat } = AuthState();
   const [chats, setChats] = useState([]);
 
   const navigate = useNavigate();
-
-  const activeChatRef = React.useRef(activeChat);
-  useEffect(() => {
-    activeChatRef.current = activeChat;
-  }, [activeChat]);
 
   useEffect(() => {
     if (!authUser) navigate('/');

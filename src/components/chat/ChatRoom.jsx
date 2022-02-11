@@ -7,32 +7,23 @@ import Message from './Message';
 import { BiArrowBack } from 'react-icons/bi';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import Button from '../Button';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 
-let socket;
+// let socket;
+
+import socket from '../../config/socketConfig';
 
 const ChatRoom = ({ chats }) => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState([]);
+  const [notifications, setNotifications] = useState([]);
+
+  useEffect(() => {
+    console.log(notifications);
+  }, [notifications]);
 
   const { authUser, setActiveChat, activeChat } = AuthState();
   const activeChatRef = React.useRef(activeChat);
-
-  useEffect(() => {
-    socket = io('http://localhost:5000', { withCredentials: true });
-    socket.on('connection', () => {
-      console.log('Socket is connected');
-    });
-
-    return () =>
-      socket.on('disconnect', () => {
-        console.log('you got disconnected');
-      });
-  }, []);
-
-  useEffect(() => {
-    chats.forEach((chat) => socket.emit('join room', chat._id, authUser));
-  }, [chats]);
 
   useEffect(() => {
     (async () => {
@@ -51,20 +42,33 @@ const ChatRoom = ({ chats }) => {
 
   useEffect(() => {
     socket.on('new message', (msg) => {
-      if (activeChatRef.current && activeChatRef.current._id === msg.chat) {
+      if (activeChatRef.current && activeChatRef.current._id === msg.chat._id) {
         setMessages((messages) => [...messages, msg]);
       } else {
-        console.log('You recieved a message in another room!');
+        if (msg.chat.isGroupChat) {
+          const notification = `You recieved a message in ${msg.chat.chatName}`;
+          setNotifications((notifications) => [...notifications, notification]);
+        } else {
+          const notification = `You recieved a message from ${msg.author.username}`;
+          setNotifications((notifications) => [...notifications, notification]);
+        }
       }
     });
+
+    return () => setNotifications([]);
   }, []);
 
   const sendMessage = async (e) => {
     e.preventDefault();
 
     if (message.length > 0) {
+      const newMessage = {
+        author: authUser.id,
+        content: message,
+        chat: activeChat._id,
+      };
       try {
-        socket.emit('send message', message, activeChat._id);
+        socket.emit('send message', newMessage);
         setMessage('');
       } catch (err) {
         console.log(err);

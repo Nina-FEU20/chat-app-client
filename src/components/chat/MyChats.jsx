@@ -6,10 +6,11 @@ import Button from '../Button';
 import CreateChat from './CreateChat';
 import { BiMessageRoundedAdd } from 'react-icons/bi';
 import avatar from '../../assets/avatar.png';
+import socket from '../../config/socketConfig';
 
-const MyChats = ({ chats, setChats }) => {
+const MyChats = ({}) => {
   const { authUser, setActiveChat, activeChat } = AuthState();
-  // const [chats, setChats] = useState([]);
+  const [chats, setChats] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
 
   const handleClick = async (chatId) => {
@@ -35,6 +36,10 @@ const MyChats = ({ chats, setChats }) => {
       setChats([]); // To remove warning "Cant perform a react state update"
     };
   }, []);
+
+  useEffect(() => {
+    chats.forEach((chat) => socket.emit('join room', chat._id, authUser));
+  }, [chats]);
 
   return (
     <div
