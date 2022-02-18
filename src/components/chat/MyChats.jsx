@@ -50,11 +50,13 @@ const MyChats = ({}) => {
 
   return (
     <div
-      className={` ${activeChat ? 'hidden' : 'flex'} sm:flex  w-full sm:w-[45%] md:w-[350px] max-w-full bg-whiteOpacity border-r-2 border-pinkgrey `}
+      className={` ${
+        activeChat ? 'hidden' : 'flex'
+      } sm:flex  w-full sm:w-[45%] md:w-[350px] max-w-full bg-whiteOpacity dark:bg-teal600 border-r-2 border-pinkgrey `}
     >
       <div className='w-full'>
         <div className='flex justify-between w-full items-end mb-4 p-4'>
-          <h3 className='text-2xl font-bold text-teal500'>My Chats</h3>
+          <h3 className='text-2xl font-bold text-teal500 dark:text-white'>My Chats</h3>
           <Button classnames='max-w-[45%] flex justify-center px-2' onClick={() => setModalOpen(!isModalOpen)}>
             <span className='text-sm pr-1'>New Chat</span>
             <BiMessageRoundedAdd className='text-xl' />
@@ -68,8 +70,8 @@ const MyChats = ({}) => {
               <div
                 key={chat._id}
                 onClick={() => handleClick(chat._id)}
-                className={`h-14 2xl:h-16 px-4 cursor-pointer hover:bg-teal100 flex items-center transition ease-in duration-200 rounded-md ml-1 mb-1 
-               ${activeChat && chat._id === activeChat._id && 'bg-teal100'}`}
+                className={`dark:text-white dark:hover:bg-teal400 h-14 2xl:h-16 px-4 cursor-pointer hover:bg-teal100 flex items-center transition ease-in duration-200 rounded-md ml-1 mb-1 
+               ${activeChat && chat._id === activeChat._id && 'bg-teal100 dark:bg-teal400'}`}
               >
                 <img src={avatar} alt='avatar' className='w-7 h-7 2xl:w-8 2xl:h-8 rounded-full mr-4' />
                 <div className=' space-y-1'>

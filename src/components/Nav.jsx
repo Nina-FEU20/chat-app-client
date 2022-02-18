@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AuthState } from '../context/AuthContext';
 import axios from 'axios';
 import { BsChatDotsFill } from 'react-icons/bs';
@@ -9,6 +9,21 @@ import AccountModal from './AccountModal';
 const Nav = ({ classnames }) => {
   const [open, setOpen] = useState(false);
   const { authUser, setAuthUser } = AuthState();
+  const [darkMode, setDarkMode] = useState(false);
+
+  const handleDarkMode = () => {};
+  console.log(darkMode);
+
+  useEffect(() => {
+    console.log('hey');
+    const root = document.getElementById('root');
+
+    if (darkMode) {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+  }, [darkMode]);
 
   const handleSignOut = async (e) => {
     e.preventDefault();
@@ -30,12 +45,12 @@ const Nav = ({ classnames }) => {
       <div className='flex justify-between items-center py-2 2xl:py-4'>
         <div className='flex items-center'>
           <BsChatDotsFill className='text-teal200 text-5xl' />
-          <h2 className='pl-2 text-xl sm:text-2xl'>Talk Daily</h2>
+          <h2 className='pl-2 text-xl sm:text-2xl dark:text-white'>Talk Daily</h2>
         </div>
-
         {authUser ? (
           <div className='flex space-x-2 sm:space-x-6 items-center'>
-            <p className='font-semibold'>{authUser.username}</p>
+            <Button onClick={() => setDarkMode(!darkMode)}>Dark Mode</Button>
+            <p className='font-semibold dark:text-white'>{authUser.username}</p>
             <img src={avatar} alt='avatar' className='h-10 border border-teal200 rounded-full p-[1px]' />
             <Button onClick={(e) => handleSignOut(e)}>Logout</Button>
           </div>

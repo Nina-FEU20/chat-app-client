@@ -4,7 +4,7 @@ const Input = ({ label, placeholder, onChange, name, type, value, classnames }) 
   return (
     <div className='space-y-1 mb-4 last-of-type:mb-0 flex-1'>
       {label && (
-        <label className='pb-2 text-teal400'>
+        <label className='pb-2 text-teal400 '>
           {label}
           <span className='text-red required-dot pl-2 '>*</span>
         </label>

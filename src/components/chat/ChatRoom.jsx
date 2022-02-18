@@ -84,7 +84,7 @@ const ChatRoom = ({ chats }) => {
   }, [messages]);
 
   return (
-    <div className={` ${activeChat ? 'block' : 'hidden'} sm:block  flex-1 bg-whiteTeal `}>
+    <div className={` ${activeChat ? 'block' : 'hidden'} sm:block  flex-1 bg-whiteTeal dark:bg-teal500 `}>
       <div className=' h-full relative'>
         {activeChat && authUser ? (
           <>
@@ -94,9 +94,9 @@ const ChatRoom = ({ chats }) => {
                   <BiArrowBack className='mr-1' />
                 </Button>
               </div>
-              <h4 className='text-lg sm:text-xl 2xl:text-2xl font-semibold text-center'>{getChatName(authUser, activeChat)}</h4>
+              <h4 className='text-lg sm:text-xl 2xl:text-2xl font-semibold text-center dark:text-teal100'>{getChatName(authUser, activeChat)}</h4>
               <div className='  sm:mr-1'>
-                <AiOutlineInfoCircle className='float-right text-2xl xl:text-3xl text-teal400' />
+                <AiOutlineInfoCircle className='float-right text-2xl xl:text-3xl text-teal400 dark:text-teal100' />
               </div>
             </div>
 
@@ -109,7 +109,7 @@ const ChatRoom = ({ chats }) => {
                 </div>
               ) : (
                 <div className='flex justify-center min-h-full items-center'>
-                  <p className='text-3xl font-semibold text-center'>No Messages yet</p>
+                  <p className='text-3xl font-semibold text-center dark:text-teal100'>No Messages yet</p>
                 </div>
               )}
               <div ref={messagesEndRef}></div>
@@ -119,7 +119,7 @@ const ChatRoom = ({ chats }) => {
           </>
         ) : (
           <div className='h-full flex justify-center items-center'>
-            <h4 className='text-3xl font-semibold flex-1 text-center'>Click on a chat to start!</h4>
+            <h4 className='text-3xl font-semibold flex-1 text-center dark:text-teal100'>Click on a chat to start!</h4>
           </div>
         )}
       </div>

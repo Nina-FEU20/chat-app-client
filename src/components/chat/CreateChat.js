@@ -72,7 +72,7 @@ const CreateChat = ({ setModalOpen, setChats, chats }) => {
     <Modal setModalOpen={setModalOpen}>
       <div className='w-[80vw] max-w-[24rem] min-h-[10rem] flex flex-col'>
         <div>
-          <h3 className='text-center text-2xl text-teal500 mb-2'>Create Chat</h3>
+          <h3 className='text-center text-2xl text-teal500 mb-2 dark:text-teal100'>Create Chat</h3>
         </div>
         <Users setUsers={setUsers} updateUsers={updateUsers} />
         <ul className='flex flex-wrap pl-1 mb-4'>

@@ -32,7 +32,7 @@ const Users = ({ updateUsers, users }) => {
 
   return (
     <div className='relative'>
-      <h3 className='pb-2 text-teal400'>Add users</h3>
+      <h3 className='pb-2 text-teal400 dark:text-teal100'>Add users</h3>
       <form>
         <DebounceInput
           minLength={2}
