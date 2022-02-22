@@ -8,7 +8,7 @@ import { BiMessageRoundedAdd } from 'react-icons/bi';
 import avatar from '../../assets/avatar.png';
 import socket from '../../config/socketConfig';
 
-const MyChats = ({}) => {
+const MyChats = () => {
   const { authUser, setActiveChat, activeChat } = AuthState();
   const [chats, setChats] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
@@ -46,13 +46,13 @@ const MyChats = ({}) => {
 
   useEffect(() => {
     chats.forEach((chat) => socket.emit('join room', chat._id, authUser));
-  }, [chats]);
+  }, [chats, authUser]);
 
   return (
     <div
       className={` ${
         activeChat ? 'hidden' : 'flex'
-      } sm:flex  w-full sm:w-[45%] md:w-[350px] max-w-full bg-whiteOpacity dark:bg-teal600 border-r-2 border-pinkgrey `}
+      } sm:flex  w-full sm:w-[45%] md:w-[350px] max-w-full bg-whiteOpacity dark:bg-teal550Transparent border-r-2 border-pinkgrey `}
     >
       <div className='w-full'>
         <div className='flex justify-between w-full items-end mb-4 p-4'>

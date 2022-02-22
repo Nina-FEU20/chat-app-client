@@ -40,7 +40,7 @@ const Nav = ({ classnames }) => {
   };
 
   return (
-    <div className={`container mx-auto max-w-[1980px] ${classnames}`}>
+    <div className={`container mx-auto max-w-[1980px] dark:bg-teal550 ${classnames}`}>
       <div className='flex justify-between items-center py-2 2xl:py-4'>
         <div className='flex items-center'>
           <BsChatDotsFill className='text-teal200 text-5xl' />

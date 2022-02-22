@@ -84,7 +84,7 @@ const ChatRoom = ({ chats }) => {
   }, [messages]);
 
   return (
-    <div className={` ${activeChat ? 'block' : 'hidden'} sm:block  flex-1 bg-whiteTeal dark:bg-teal500 `}>
+    <div className={` ${activeChat ? 'block' : 'hidden'} sm:block  flex-1 bg-whiteTeal dark:bg-teal600Transparent `}>
       <div className=' h-full relative'>
         {activeChat && authUser ? (
           <>

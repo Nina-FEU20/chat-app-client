@@ -1,21 +1,11 @@
 import { AuthState } from '../../context/AuthContext';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import avatar from '../../assets/avatar.png';
 import { format, formatDistanceStrict } from 'date-fns';
 
 const Message = ({ message, messages }) => {
   const { authUser } = AuthState();
   const [isAuthor, setIsAuthor] = useState(false);
-
-  // const messagesEndRef = useRef(null);
-
-  // const scrollToBottom = () => {
-  //   messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  // };
-
-  // useEffect(() => {
-  //   scrollToBottom();
-  // }, [message]);
 
   useEffect(() => {
     if (authUser.id === message.author._id) setIsAuthor(true);

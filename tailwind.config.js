@@ -13,6 +13,7 @@ module.exports = {
       teal400: '#316464',
       teal450: '#2d4949',
       teal500: '#132121',
+      teal550: '#111a1a',
       teal600: '#0A0E0E',
       pink100: '#dac4e2',
       pink200: '#C0A8C9',
@@ -23,6 +24,8 @@ module.exports = {
       white: '#FFFFFF',
       whiteOpacity: '#ffffffdd',
       blackOpacity: '#00000081',
+      teal600Transparent: '#0a0e0ed5',
+      teal550Transparent: '#111a1aea',
       yellow: '#ffd900',
     },
     extend: {
