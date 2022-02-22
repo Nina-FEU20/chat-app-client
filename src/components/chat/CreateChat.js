@@ -33,7 +33,6 @@ const CreateChat = ({ setModalOpen, setChats, chats }) => {
 
       if (users.length > 1) {
         if (chatName.length <= 0) {
-          console.log('namn: ' + chatName);
           setError('To create a GroupChat you must give it a name!');
           return;
         }
