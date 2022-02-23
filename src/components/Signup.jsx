@@ -33,7 +33,6 @@ const Signup = ({ setOpen }) => {
 
     try {
       const { data } = await axios.post('http://localhost:5000/api/user', { username, password }, config);
-      console.log(data);
 
       setUsername('');
       setPassword('');
@@ -80,7 +79,7 @@ const Signup = ({ setOpen }) => {
           placeholder='Confirm Password'
         />
         <p className='text-red font-medium text-sm -mt-2'>{error && '* ' + error}</p>
-        <Button filled='true' type='submit' onClick={handleSubmit} classnames='mt-4'>
+        <Button filled='true' type='submit' onClick={handleSubmit} classnames='mt-8 w-full'>
           Sign up
         </Button>
       </form>

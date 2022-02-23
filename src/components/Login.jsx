@@ -18,7 +18,6 @@ const Login = ({ setOpen }) => {
 
     try {
       const { data } = await axios.post('http://localhost:5000/api/user/login', { username, password }, { withCredentials: true });
-      console.log(data);
 
       setUsername('');
       setPassword('');
@@ -58,7 +57,7 @@ const Login = ({ setOpen }) => {
           placeholder='Password'
         />
         <p className='text-red font-medium text-sm -mt-2'>{error && '* ' + error}</p>
-        <Button filled='true' type='submit' onClick={(e) => handleSubmit(e)} classnames='mt-4'>
+        <Button filled='true' type='submit' onClick={(e) => handleSubmit(e)} classnames='mt-8 w-full'>
           Login
         </Button>
       </form>

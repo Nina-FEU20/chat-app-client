@@ -23,8 +23,8 @@ const MyChats = () => {
   };
 
   useEffect(() => {
-    console.log('Im listening!!');
     socket.on('created chat', (data) => {
+      console.log(data);
       setChats((chats) => [data, ...chats]);
     });
   }, []);
@@ -76,9 +76,9 @@ const MyChats = () => {
                 <img src={avatar} alt='avatar' className='w-7 h-7 2xl:w-8 2xl:h-8 rounded-full mr-4' />
                 <div className=' space-y-1'>
                   <h4 className='text-sm 2xl:text-base'>{getChatName(authUser, chat)}</h4>
-                  <p className='text-xs 2xl:text-sm'>
+                  {/* FUTURE: <p className='text-xs 2xl:text-sm'>
                     <span className='font-semibold'>placeholder:</span> latest message
-                  </p>
+                  </p> */}
                 </div>
               </div>
             ))}

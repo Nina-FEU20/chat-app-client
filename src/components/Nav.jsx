@@ -29,7 +29,7 @@ const Nav = ({ classnames }) => {
 
     try {
       const { data } = await axios.post('http://localhost:5000/api/user/logout', { user: authUser }, { withCredentials: true });
-      console.log(data);
+
       localStorage.clear();
       setAuthUser(null);
     } catch (err) {
@@ -49,17 +49,17 @@ const Nav = ({ classnames }) => {
         {authUser ? (
           <div className='flex space-x-2 sm:space-x-4 items-center'>
             <div
-              className='w-14 h-7 flex items-center bg-teal200 dark:bg-teal400 rounded-full p-1 cursor-pointer relative -mr-2 sm:mr-0'
+              className='w-14 h-7 flex items-center bg-teal300 dark:bg-teal400 rounded-full p-1 cursor-pointer relative -mr-2 sm:mr-0'
               onClick={() => {
                 setDarkMode(!darkMode);
               }}
             >
-              <BsFillMoonStarsFill className='absolute left-2 text-teal500  ' />
-              <BsFillSunFill className='absolute right-2 dark:text-yellow' />
+              <BsFillMoonStarsFill className='absolute left-2 text-teal500 text-yellow ' />
+              <BsFillSunFill className='absolute right-[6px] dark:text-yellow text-lg' />
               {/* Switch */}
               <div
                 className={
-                  'bg-teal400 dark:bg-teal600 w-6 h-6  rounded-full shadow-md transform duration-300 ease-in-out' + (darkMode ? null : toggleClass)
+                  'bg-teal500 dark:bg-teal600 w-6 h-6  rounded-full shadow-md transform duration-300 ease-in-out' + (darkMode ? null : toggleClass)
                 }
               ></div>
             </div>
