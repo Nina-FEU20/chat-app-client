@@ -1,4 +1,4 @@
-#### To start the server: 
+#### To start the client: 
 1. Run npm install
 2. Run npm start
 
